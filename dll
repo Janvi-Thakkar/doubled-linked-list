@@ -1,0 +1,165 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+void cdll(int);
+void display();
+void daf();
+void iaf();
+void dal();
+void ial();
+struct node
+{
+    int data;
+    struct node *prev;
+    struct node *next;
+};
+struct node *first=NULL;
+struct node *ptr;
+struct node *new_node;
+struct node *pre;
+void main()
+{
+    int c,n;
+    bk :
+    printf("\n 1 create link list\n 2 exit\n 3 display\n 4 insret at first\n 5 insert at last\n 6 delete at first\n 7 delete at last");
+    printf("\n enter your choice:-");
+    scanf("%d",&c);
+    switch(c)
+    {
+        case 1 :
+            printf("\n how many number:-");
+            scanf("%d",&n);
+            cdll(n);
+            goto bk;
+        case 2 :
+           exit(0);
+        case 3 :
+           display();
+           goto bk;
+        case 4:
+            iaf();
+            goto bk;
+        case 5:
+            ial();
+            goto bk;
+        case 6 :
+            daf();
+            goto bk;
+        case 7:
+            dal();
+            goto bk;
+    }
+}
+void daf()
+{
+     struct node *temp;
+     ptr=first;
+     temp=first;
+     first=ptr->next;
+     first->prev=NULL;
+     free(temp);
+}
+void dal()
+{
+    struct node *temp;
+    ptr=first;
+    while(ptr->next!=NULL)
+    {
+        pre=ptr;
+        ptr=ptr->next;
+        temp=ptr->next;
+    }
+    pre->next=NULL;
+    //temp=ptr;
+    free(temp);
+}
+void ial()
+{
+          int num;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    printf("\n enter the data:-");
+    scanf("%d",&num);
+    new_node->data=num;
+    if(first==NULL)
+    {
+        first=new_node;
+        new_node->prev=NULL;
+        new_node->next=NULL;
+    }
+    else
+    {
+        ptr=first;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=new_node;
+        new_node->prev=ptr;
+        new_node->next=NULL;
+    }
+}
+void iaf()
+{
+    int num;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    printf("\n enter the data:-");
+    scanf("%d",&num);
+    new_node->data=num;
+    if(first==NULL)
+    {
+        first=new_node;
+        new_node->prev=NULL;
+        new_node->next=NULL;
+    }
+    else
+    {
+        new_node->next=first;
+        new_node->prev=NULL;
+        first=new_node;
+    }
+}
+void cdll(int n)
+{
+       int i;
+       for(i=0;i<n;i++)
+       {
+         new_node=(struct node*)malloc(sizeof(struct node));
+         printf("\n enter the data:-");
+         scanf("%d",&(new_node->data));
+         if(first==NULL)
+         {
+             first=new_node;
+             new_node->next=NULL;
+             new_node->prev=NULL;
+         }
+         else
+         {
+             ptr=first;
+             while(ptr->next!=NULL)
+             {
+                ptr=ptr->next;
+             }
+             ptr->next=new_node;
+             new_node->prev=ptr;
+             new_node->next=NULL;
+         }
+       }
+}
+void display()
+{
+     if(first==NULL)
+     {
+       printf("\n link list is empty");
+     }
+     else
+     {
+        printf("\n data\t preadderss \t\t nextaddress\t\t address");
+        ptr=first;
+        while(ptr->next!=NULL)
+        {
+          printf("\n %3d\t %8d \t\t %8d \t\t %8d",ptr->data,ptr->prev,ptr->next,ptr);
+          ptr=ptr->next;
+        }
+         printf("\n %3d\t %8d \t\t %8d \t\t %8d",ptr->data,ptr->prev,ptr->next,ptr);
+     }
+}
